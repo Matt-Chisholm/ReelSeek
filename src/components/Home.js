@@ -1,11 +1,12 @@
 import React from "react";
 
 export default function Home() {
+  console.log(process.env.REACT_APP_API_KEY);
   return (
     <>
       <header className='bg-white py-4'>
         <div className='container mx-auto flex justify-between items-center px-4'>
-          <h1 className='text-xl font-bold text-gray-800'>Movie Streamer</h1>
+          <h1 className='text-xl font-bold text-gray-800'>ReelSeek</h1>
           <nav>
             <ul className='flex items-center'>
               <li>
