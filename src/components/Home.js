@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [movieName, setMovieName] = useState("");
+  const [results, setResults] = useState([]);
+
   const bgColor = isDarkMode ? "bg-gray-800" : "bg-white";
   const textColor = isDarkMode ? "text-white" : "text-gray-800";
 
   const handleModeChange = () => {
     setIsDarkMode((prevState) => !prevState);
+  };
+
+  const handleMovieSearch = (searchTerm) => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${searchTerm}`
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -65,12 +81,15 @@ export default function Home() {
             <input
               className={`appearance-none bg-transparent border-none w-full ${textColor} mr-3 py-1 px-2 leading-tight focus:outline-none`}
               type='text'
+              value={movieName}
+              onChange={(e) => setMovieName(e.target.value)}
               placeholder='Search for a movie'
             />
             <button
               className={`flex-shrink-0 ${
                 isDarkMode ? "bg-gray-800" : "bg-teal-500"
               } hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded`}
+              onClick={() => handleMovieSearch(movieName)}
               type='button'>
               Search
             </button>
