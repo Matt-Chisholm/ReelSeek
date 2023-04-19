@@ -97,19 +97,23 @@ export default function Home() {
           </div>
         </form>
         <div className='flex flex-col items-center mt-10'>
-          {results.slice(0, 5).map((result) => (
-            <div key={result.id} className='flex items-center mb-4'>
-              <img
-                src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}
-                alt={result.title}
-                className='w-32 h-auto mr-4'
-              />
-              <div>
-                <h3 className='text-2xl font-bold'>{result.title}</h3>
-                <p className='text-gray-600'>{result.overview}</p>
+          {results.slice(0, 5).map((result) =>
+            result.poster_path === null ? (
+              <div></div>
+            ) : (
+              <div key={result.id} className='flex items-center mb-4'>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}
+                  alt={result.title}
+                  className='w-32 h-auto mr-4'
+                />
+                <div>
+                  <h3 className='text-2xl font-bold'>{result.title}</h3>
+                  <p className='text-gray-600'>{result.overview}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
       </main>
     </div>
