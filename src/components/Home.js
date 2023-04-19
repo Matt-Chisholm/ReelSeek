@@ -4,6 +4,7 @@ import axios from "axios";
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [movieName, setMovieName] = useState("");
+  const [streamers, setStreamers] = useState({});
   const [results, setResults] = useState([]);
 
   const bgColor = isDarkMode ? "bg-gray-800" : "bg-white";
@@ -19,8 +20,21 @@ export default function Home() {
         `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${searchTerm}`
       )
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.results);
         setResults(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const streamingProviderSearch = (movieId) => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${process.env.REACT_APP_API_KEY}`
+      )
+      .then((response) => {
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -77,7 +91,12 @@ export default function Home() {
         <h2 className='text-4xl font-bold mb-4'>
           Find Where to Stream Your Favorite Movies
         </h2>
-        <form className='max-w-md mx-auto'>
+        <form
+          className='max-w-md mx-auto'
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleMovieSearch(movieName);
+          }}>
           <div className='flex items-center mt-10 border-b border-b-2 border-teal-500 py-2'>
             <input
               className={`appearance-none bg-transparent border-none w-full ${textColor} mr-3 py-1 px-2 leading-tight focus:outline-none`}
