@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 export default function Home() {
-  console.log(process.env.REACT_APP_API_KEY);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const bgColor = isDarkMode ? "bg-gray-800" : "bg-white";
+  const textColor = isDarkMode ? "text-white" : "text-gray-800";
+
+  const handleModeChange = () => {
+    setIsDarkMode((prevState) => !prevState);
+  };
+
   return (
     <>
       <header className='bg-white py-4'>
