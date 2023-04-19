@@ -99,7 +99,7 @@ export default function Home() {
         <div className='flex flex-col items-center mt-10'>
           {results.slice(0, 5).map((result) =>
             result.poster_path === null ? (
-              <div></div>
+              <div key={result.id}></div>
             ) : (
               <div key={result.id} className='flex items-center mb-4'>
                 <img
@@ -107,9 +107,26 @@ export default function Home() {
                   alt={result.title}
                   className='w-32 h-auto mr-4'
                 />
-                <div>
+                <div className='flex flex-col'>
                   <h3 className='text-2xl font-bold'>{result.title}</h3>
-                  <p className='text-gray-600'>{result.overview}</p>
+                  <div className='flex items-center'>
+                    <p className='text-gray-500 text-sm mr-2'>
+                      {result.release_date.substring(0, 4)}
+                    </p>
+                    <p
+                      className={`text-sm font-bold ${
+                        result.vote_average >= 7.5
+                          ? "text-green-500"
+                          : result.vote_average >= 5
+                          ? "text-yellow-500"
+                          : "text-red-500"
+                      } mr-2`}>
+                      {result.vote_average.toFixed(1)} /10
+                    </p>
+                  </div>
+                  <p className='text-gray-600 text-sm mt-2'>
+                    {result.overview}
+                  </p>
                 </div>
               </div>
             )
