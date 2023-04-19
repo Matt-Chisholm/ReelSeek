@@ -34,7 +34,8 @@ export default function Home() {
         `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${process.env.REACT_APP_API_KEY}`
       )
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.results);
+        setStreamers(response.data.results);
       })
       .catch((error) => {
         console.log(error);
@@ -143,9 +144,17 @@ export default function Home() {
                       {result.vote_average.toFixed(1)} /10
                     </p>
                   </div>
+
                   <p className='text-gray-600 text-sm mt-2'>
                     {result.overview}
                   </p>
+                  <div className='flex items-center justify-center mt-8'>
+                    <button
+                      className='bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded mr-2'
+                      onClick={() => streamingProviderSearch(result.id)}>
+                      Find Streaming Providers
+                    </button>
+                  </div>
                 </div>
               </div>
             )
