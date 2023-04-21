@@ -17,30 +17,38 @@ export default function Home() {
   };
 
   const handleMovieSearch = (searchTerm) => {
+    setLoading(true);
     axios
       .get(
         `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${searchTerm}`
       )
       .then((response) => {
         console.log(response.data.results);
+        setLoading(false);
         setResults(response.data.results);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
+        setError(error);
       });
   };
 
   const streamingProviderSearch = (movieId) => {
+    setLoading(true);
     axios
       .get(
         `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${process.env.REACT_APP_API_KEY}`
       )
       .then((response) => {
         console.log(response.data.results);
+        setLoading(false);
         setStreamers(response.data.results);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
+        setError(error);
       });
   };
 
