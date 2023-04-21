@@ -6,6 +6,8 @@ export default function Home() {
   const [movieName, setMovieName] = useState("");
   const [streamers, setStreamers] = useState({});
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const bgColor = isDarkMode ? "bg-gray-800" : "bg-white";
   const textColor = isDarkMode ? "text-white" : "text-gray-800";
@@ -117,6 +119,39 @@ export default function Home() {
           </div>
         </form>
         <div className='flex flex-col items-center mt-10'>
+          {
+            // If loading is true, show the loading spinner
+            loading && (
+              <div className='flex items-center justify-center'>
+                <svg
+                  className='animate-spin -ml-1 mr-3 h-5 w-5 text-gray-800'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'>
+                  <circle
+                    className='opacity-25'
+                    cx='12'
+                    cy='12'
+                    r='10'
+                    stroke='currentColor'
+                    stroke-width='4'></circle>
+                  <path
+                    className='opacity-75'
+                    fill='currentColor'
+                    d='M4 12a8 8 0 018-8v8z'></path>
+                </svg>
+                <p className='text-gray-800'>Loading...</p>
+              </div>
+            )
+          }
+          {
+            // If there is an error, show the error message
+            error && (
+              <div className='flex items-center justify-center'>
+                <p className='text-gray-800'>{error}</p>
+              </div>
+            )
+          }
           {results.slice(0, 5).map((result) =>
             result.poster_path === null ? (
               <div key={result.id}></div>
