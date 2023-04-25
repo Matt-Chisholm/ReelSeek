@@ -4,7 +4,7 @@ import axios from "axios";
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [movieName, setMovieName] = useState("");
-  const [streamers, setStreamers] = useState({});
+  const [streamers, setStreamers] = useState([]);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,7 +15,6 @@ export default function Home() {
   const handleModeChange = () => {
     setIsDarkMode((prevState) => !prevState);
   };
-
   const handleMovieSearch = (searchTerm) => {
     setLoading(true);
     axios
@@ -44,9 +43,10 @@ export default function Home() {
         console.log(response.data.results);
         setLoading(false);
         if (response.data.results.CA) {
-          setStreamers(response.data.results.CA.buy);
+          const providers = response.data.results.CA.buy;
+          setStreamers(providers);
         } else {
-          setStreamers("No streaming providers found in Canada");
+          setError("No streaming providers found");
         }
       })
       .catch((error) => {
@@ -195,26 +195,7 @@ export default function Home() {
                   <p className='text-gray-600 text-sm mt-2'>
                     {result.overview}
                   </p>
-                  {streamers.length > 0 && (
-                    <div className='mt-4'>
-                      <h4 className='text-xl font-bold mb-2'>
-                        Streaming Providers
-                      </h4>
-                      <div className='flex flex-wrap'>
-                        {streamers.map((streamer) => (
-                          <div
-                            key={streamer.provider_id}
-                            className='flex items-center justify-center bg-gray-200 rounded-full px-4 py-2 mr-2 mb-2'>
-                            <img
-                              src={`https://image.tmdb.org/t/p/w500${streamer.logo_path}`}
-                              alt={streamer.provider_name}
-                              className='w-8 h-auto'
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+
                   <div className='flex items-center justify-center mt-8'>
                     <button
                       className='bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded mr-2'
@@ -222,6 +203,19 @@ export default function Home() {
                       Find Streaming Providers
                     </button>
                   </div>
+                  {streamers.length > 0 && (
+                    <div className='flex items-center justify-center mt-4'>
+                      <p className='text-gray-600 text-sm'>Available on:</p>
+                      {streamers.map((streamer) => (
+                        <img
+                          key={streamer.provider_id}
+                          src={`https://image.tmdb.org/t/p/w500${streamer.logo_path}`}
+                          alt={streamer.provider_name}
+                          className='w-10 h-10 object-contain rounded-full ml-2 border-2 border-white hover:border-gray-400 transition-all duration-300 ease-in-out'
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             )
