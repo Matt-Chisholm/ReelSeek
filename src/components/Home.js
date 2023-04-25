@@ -49,6 +49,7 @@ export default function Home() {
           setStreamers(providers);
         } else {
           setError("No streaming providers found");
+          setStreamers([]);
         }
       })
       .catch((error) => {
@@ -158,14 +159,6 @@ export default function Home() {
               </div>
             )
           }
-          {
-            // If there is an error, show the error message
-            error && (
-              <div className='flex items-center justify-center'>
-                <p className='text-gray-800'>{error}</p>
-              </div>
-            )
-          }
           {results.slice(0, 5).map((result) =>
             result.poster_path === null ? (
               <div key={result.id}></div>
@@ -205,7 +198,8 @@ export default function Home() {
                       Find Streaming Providers
                     </button>
                   </div>
-                  {streamers.length > 0 && selectedMovieId === result.id && (
+                  {error && <div className='text-red-500'>{error.message}</div>}
+                  {streamers?.length > 0 && selectedMovieId === result.id && (
                     <div className='flex items-center justify-center mt-4'>
                       <p className='text-gray-600 text-sm'>Available on:</p>
                       {streamers.map((streamer) => (
