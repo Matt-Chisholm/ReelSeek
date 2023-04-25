@@ -5,6 +5,7 @@ export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [movieName, setMovieName] = useState("");
   const [streamers, setStreamers] = useState([]);
+  const [selectedMovieId, setSelectedMovieId] = useState(null); // [1
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -35,6 +36,7 @@ export default function Home() {
 
   const streamingProviderSearch = (movieId) => {
     setLoading(true);
+    setSelectedMovieId(movieId);
     axios
       .get(
         `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${process.env.REACT_APP_API_KEY}`
@@ -203,7 +205,7 @@ export default function Home() {
                       Find Streaming Providers
                     </button>
                   </div>
-                  {streamers.length > 0 && (
+                  {streamers.length > 0 && selectedMovieId === result.id && (
                     <div className='flex items-center justify-center mt-4'>
                       <p className='text-gray-600 text-sm'>Available on:</p>
                       {streamers.map((streamer) => (
