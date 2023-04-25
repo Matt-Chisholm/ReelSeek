@@ -43,7 +43,11 @@ export default function Home() {
       .then((response) => {
         console.log(response.data.results);
         setLoading(false);
-        setStreamers(response.data.results);
+        if (response.data.results.CA) {
+          setStreamers(response.data.results.CA.buy);
+        } else {
+          setStreamers("No streaming providers found in Canada");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -191,6 +195,26 @@ export default function Home() {
                   <p className='text-gray-600 text-sm mt-2'>
                     {result.overview}
                   </p>
+                  {streamers.length > 0 && (
+                    <div className='mt-4'>
+                      <h4 className='text-xl font-bold mb-2'>
+                        Streaming Providers
+                      </h4>
+                      <div className='flex flex-wrap'>
+                        {streamers.map((streamer) => (
+                          <div
+                            key={streamer.provider_id}
+                            className='flex items-center justify-center bg-gray-200 rounded-full px-4 py-2 mr-2 mb-2'>
+                            <img
+                              src={`https://image.tmdb.org/t/p/w500${streamer.logo_path}`}
+                              alt={streamer.provider_name}
+                              className='w-8 h-auto'
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   <div className='flex items-center justify-center mt-8'>
                     <button
                       className='bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded mr-2'
