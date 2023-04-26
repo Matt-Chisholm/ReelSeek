@@ -44,6 +44,7 @@ export default function Home({ selectedScreen, setSelectedScreen }) {
           <Nav
             selectedScreen={selectedScreen}
             setSelectedScreen={setSelectedScreen}
+            isDarkMode={isDarkMode}
           />
           <div
             className='w-6 h-6 rounded-full cursor-pointer'

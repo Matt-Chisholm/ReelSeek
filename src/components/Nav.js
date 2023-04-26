@@ -1,15 +1,9 @@
 import { useState } from "react";
 import React from "react";
 
-export default function Nav({ selectedScreen, setSelectedScreen }) {
-  const [isDarkMode, setIsDarkMode] = useState(true);
-
+export default function Nav({ selectedScreen, setSelectedScreen, isDarkMode }) {
   const bgColor = isDarkMode ? "bg-gray-800" : "bg-white";
   const textColor = isDarkMode ? "text-white" : "text-gray-800";
-
-  const handleModeChange = () => {
-    setIsDarkMode((prevState) => !prevState);
-  };
 
   return (
     <div>
@@ -22,7 +16,7 @@ export default function Nav({ selectedScreen, setSelectedScreen }) {
                 className='inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'
                 aria-controls='mobile-menu'
                 aria-expanded='false'
-                onClick={handleModeChange}>
+                onClick=''>
                 <span className='sr-only'>Open main menu</span>
                 <svg
                   className='block h-6 w-6'
