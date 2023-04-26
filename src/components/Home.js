@@ -36,32 +36,6 @@ export default function Home() {
       });
   };
 
-  const streamingProviderSearch = (movieId) => {
-    setLoading(true);
-    setSelectedMovieId(movieId);
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${process.env.REACT_APP_API_KEY}`
-      )
-      .then((response) => {
-        console.log(response.data.results);
-        setLoading(false);
-        if (response.data.results.CA) {
-          const providers = response.data.results.CA.buy;
-          setStreamers(providers);
-          setError(null);
-        } else {
-          setStreamers([]);
-          setError("No streaming providers found");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        setError(error);
-      });
-  };
-
   return (
     <div className={`min-h-screen ${bgColor} ${textColor}`}>
       <header className={`py-4 ${textColor}`}>
@@ -143,8 +117,11 @@ export default function Home() {
             <MovieResult
               key={movie.id}
               movie={movie}
-              streamingProviderSearch={streamingProviderSearch}
-              selectedMovieId={selectedMovieId} // [2
+              setSelectedMovieId={setSelectedMovieId}
+              selectedMovieId={selectedMovieId}
+              onSelect={(movieId) => {
+                setSelectedMovieId(movieId);
+              }}
             />
           ))}
         </div>
