@@ -38,36 +38,45 @@ export default function MovieResult({
   };
 
   return (
-    <div className='flex flex-col items-center my-4'>
-      <img
-        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-        alt={`${movie.title} poster`}
-        className='mb-2'
-      />
-      <h3 className='text-lg font-bold'>{movie.title}</h3>
-      <p className='text-sm text-gray-500'>{movie.release_date}</p>
-      <button
-        className='mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700'
-        onClick={() => streamingProviderSearch(movie.id)}>
-        Find Where to Watch
-      </button>
-      {loading && (
-        <div className='text-center mt-2 text-gray-500'>Loading...</div>
-      )}
-      {error && <div className='text-center mt-2 text-red-500'>{error}</div>}
-
-      {streamers && streamers.length > 0 && (
-        <div className='mt-2'>
-          {streamers.map((streamer, index) => (
-            <div key={index} className='inline-block mx-1'>
-              <img
-                src={`https://image.tmdb.org/t/p/w92${streamer.logo_path}`}
-                style={{ borderRadius: "50%", width: "50px", height: "50px" }}
-              />
+    <div>
+      <div className='rounded-lg shadow-lg overflow-hidden'>
+        <img
+          className='h-56 w-full object-contain'
+          src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+          alt={`${movie.title} poster not provided`}
+        />
+        <div className='p-4'>
+          <h3 className='text-lg font-bold mb-2'>{movie.title}</h3>
+          <p className='text-sm text-gray-500 mb-2'>{movie.release_date}</p>
+          <button
+            className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 mb-2'
+            onClick={() => streamingProviderSearch(movie.id)}>
+            Find Where to Watch
+          </button>
+          {loading && (
+            <div className='text-center mt-2 text-gray-500'>Loading...</div>
+          )}
+          {error && (
+            <div className='text-center mt-2 text-red-500'>{error}</div>
+          )}
+          {streamers && streamers.length > 0 && (
+            <div className='mt-2'>
+              {streamers.map((streamer, index) => (
+                <div key={index} className='inline-block mx-1'>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w92${streamer.logo_path}`}
+                    style={{
+                      borderRadius: "50%",
+                      width: "50px",
+                      height: "50px",
+                    }}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
