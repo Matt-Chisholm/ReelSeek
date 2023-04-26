@@ -59,41 +59,38 @@ export default function About({ selectedScreen, setSelectedScreen }) {
           </p>
         </section>
 
-        <section className='container mx-auto py-10'>
-          <h2 className='text-2xl font-bold mb-4'>Contact</h2>
-          <div className='flex items-center mb-4'>
-            <FaLinkedin className='mr-2' />
+        <section className='container mx-auto py-10 text-center'>
+          <h2 className='text-3xl font-bold mb-4'>Contact</h2>
+          <p className='text-lg mb-6'>
+            ReelSeek was created for development and portfolio purposes. Connect
+            with me and explore my other projects.
+          </p>
+          <div className='flex justify-center mb-4'>
             <a
               href='https://www.linkedin.com/in/matt-chisholm10/'
               target='_blank'
               rel='noopener noreferrer'
-              className='text-blue-300 hover:text-blue-500'>
-              LinkedIn
-              <RiExternalLinkLine className='inline ml-1' />
+              className='flex items-center text-blue-300 hover:text-blue-500 mr-4'>
+              <FaLinkedin className='w-6 h-6' />
+              <span className='ml-2'>LinkedIn</span>
             </a>
-          </div>
-          <div className='flex items-center mb-4'>
-            <FaGithub className='mr-2' />
             <a
               href='https://github.com/Matt-Chisholm'
               target='_blank'
               rel='noopener noreferrer'
-              className='text-blue-300 hover:text-blue-500'>
-              GitHub
-              <RiExternalLinkLine className='inline ml-1' />
+              className='flex items-center text-blue-300 hover:text-blue-500 mr-4'>
+              <FaGithub className='w-6 h-6' />
+              <span className='ml-2'>GitHub</span>
             </a>
-          </div>
-          <div className='flex items-center mb-4'>
-            <img
-              src='https://img.icons8.com/ios-filled/50/000000/email.png'
-              alt='Email icon'
-              className='w-6 h-6 mr-2'
-            />
             <a
               href='mailto:mathesonchisholm@hotmail.com'
-              className='text-blue-300 hover:text-blue-500'>
-              mathesonchisholm@hotmail.com
-              <RiExternalLinkLine className='inline ml-1' />
+              className='flex items-center text-blue-300 hover:text-blue-500'>
+              <img
+                src='https://img.icons8.com/ios-filled/50/000000/email.png'
+                alt='Email icon'
+                className='w-6 h-6'
+              />
+              <span className='ml-2'>mathesonchisholm@hotmail.com</span>
             </a>
           </div>
         </section>

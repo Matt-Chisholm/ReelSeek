@@ -57,13 +57,21 @@ export default function Nav({ selectedScreen, setSelectedScreen, isDarkMode }) {
                   <a
                     href='#'
                     onClick={() => setSelectedScreen("home")}
-                    className={`px-3 py-2 rounded-md text-sm font-medium ${textColor} hover:text-white hover:bg-gray-700`}>
+                    className={`px-3 py-2 rounded-md text-sm font-medium ${textColor} hover:text-white hover:bg-gray-700 ${
+                      selectedScreen === "home"
+                        ? "border-t-2 border-b-2 border-teal-500"
+                        : ""
+                    }`}>
                     Home
                   </a>
                   <a
                     href='#'
                     onClick={() => setSelectedScreen("about")}
-                    className={`px-3 py-2 rounded-md text-sm font-medium ${textColor} hover:text-white hover:bg-gray-700`}>
+                    className={`px-3 py-2 rounded-md text-sm font-medium ${textColor} hover:text-white hover:bg-gray-700 ${
+                      selectedScreen === "about"
+                        ? "border-t-2 border-b-2 border-teal-500"
+                        : ""
+                    }`}>
                     About
                   </a>
                 </div>
