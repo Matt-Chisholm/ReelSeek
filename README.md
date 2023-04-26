@@ -13,3 +13,4 @@ ReelSeek is a web app that allows users to search for movies and find out where 
 
 - The Movie Database (TMDb) API
 
+![Alt Text](https://i2.paste.pics/bb34fb747eddc36d3436b51acc8ffc00.png?trs=d480514643a95f72495df67a610f30e276e3cbd71f10567c404323213de6bb03)
