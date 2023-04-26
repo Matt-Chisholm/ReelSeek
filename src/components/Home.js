@@ -107,7 +107,7 @@ export default function Home() {
 
       <main className='container mx-auto py-12 px-4'>
         <h2 className='text-4xl font-bold mb-4'>
-          Find Where to Stream Your Favorite Movies
+          Search for your favorite movies
         </h2>
         <form
           className='max-w-md mx-auto'
